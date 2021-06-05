@@ -1,5 +1,5 @@
 ---
-name: "bitweb-win-0.17"
+name: "bitweb-win-0.16"
 enable_cache: true
 suites:
 - "bionic"
@@ -23,7 +23,7 @@ packages:
 - "python"
 - "rename"
 remotes:
-- "url": "https://github.com/SACSaveCoin/BTE.git"
+- "url": "https://github.com/bitweb-project/bitweb.git"
   "dir": "bitweb"
 files: []
 script: |

@@ -231,8 +231,8 @@ class Benchmark {
         }
       }
       fclose(cpuinfo);
-      fprintf(stderr, "BTE:        %d * %s\n", num_cpus, cpu_type.c_str());
-      fprintf(stderr, "BTECache:   %s\n", cache_size.c_str());
+      fprintf(stderr, "CPU:        %d * %s\n", num_cpus, cpu_type.c_str());
+      fprintf(stderr, "CPUCache:   %s\n", cache_size.c_str());
     }
 #endif
   }

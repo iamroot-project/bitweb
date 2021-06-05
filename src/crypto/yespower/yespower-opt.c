@@ -46,8 +46,8 @@
 /*
  * AVX and especially XOP speed up Salsa20 a lot, but needlessly result in
  * extra instruction prefixes for pwxform (which we make more use of).  While
- * no slowdown from the prefixes is generally observed on AMD BTEs supporting
- * XOP, some slowdown is sometimes observed on Intel BTEs with AVX.
+ * no slowdown from the prefixes is generally observed on AMD CPUs supporting
+ * XOP, some slowdown is sometimes observed on Intel CPUs with AVX.
  */
 /*
 #ifdef __XOP__
@@ -67,7 +67,7 @@
  * The SSE4 code version has fewer instructions than the generic SSE2 version,
  * but all of the instructions are SIMD, thereby wasting the scalar execution
  * units.  Thus, the generic SSE2 version below actually runs faster on some
- * BTEs due to its balanced mix of SIMD and scalar instructions.
+ * CPUs due to its balanced mix of SIMD and scalar instructions.
  */
 #undef USE_SSE4_FOR_32BIT
 
@@ -440,12 +440,12 @@ typedef struct {
 
 #ifdef __SSE2__
 /*
- * (V)PSRLDQ and (V)PSHUFD have higher throughput than (V)PSRLQ on some BTEs
+ * (V)PSRLDQ and (V)PSHUFD have higher throughput than (V)PSRLQ on some CPUs
  * starting with Sandy Bridge.  Additionally, PSHUFD uses separate source and
  * destination registers, whereas the shifts would require an extra move
  * instruction for our code when building without AVX.  Unfortunately, PSHUFD
  * is much slower on Conroe (4 cycles latency vs. 1 cycle latency for PSRLQ)
- * and somewhat slower on some non-Intel BTEs (luckily not including AMD
+ * and somewhat slower on some non-Intel CPUs (luckily not including AMD
  * Bulldozer and Piledriver).
  */
 #ifdef __AVX__
@@ -527,7 +527,7 @@ static volatile uint64_t Smask2var = Smask2;
 }
 #elif defined(__x86_64__)
 /* 64-bit without AVX.  This relies on out-of-order execution and register
- * renaming.  It may actually be fastest on BTEs with AVX(2) as well - e.g.,
+ * renaming.  It may actually be fastest on CPUs with AVX(2) as well - e.g.,
  * it runs great on Haswell. */
 #warning "Note: using x86-64 inline assembly for pwxform.  That's great."
 #undef MAYBE_MEMORY_BARRIER

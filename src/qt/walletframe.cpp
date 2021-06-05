@@ -124,13 +124,6 @@ void WalletFrame::gotoHistoryPage()
         i.value()->gotoHistoryPage();
 }
 
-void WalletFrame::gotoBlockExplorerPage()
-{
-    WalletView *walletView = currentWalletView();
-    if (walletView)
-        walletView->gotoBlockExplorerPage();
-}
-
 void WalletFrame::gotoReceiveCoinsPage()
 {
     QMap<QString, WalletView*>::const_iterator i;

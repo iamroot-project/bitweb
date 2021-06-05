@@ -76,11 +76,11 @@ static inline int64_t GetPerformanceCounter()
 #if defined(__x86_64__) || defined(__amd64__) || defined(__i386__)
 static std::atomic<bool> hwrand_initialized{false};
 static bool rdrand_supported = false;
-static constexpr uint32_t BTEID_F1_ECX_RDRAND = 0x40000000;
+static constexpr uint32_t CPUID_F1_ECX_RDRAND = 0x40000000;
 static void RDRandInit()
 {
     uint32_t eax, ebx, ecx, edx;
-    if (__get_cpuid(1, &eax, &ebx, &ecx, &edx) && (ecx & BTEID_F1_ECX_RDRAND)) {
+    if (__get_cpuid(1, &eax, &ebx, &ecx, &edx) && (ecx & CPUID_F1_ECX_RDRAND)) {
         LogPrintf("Using RdRand as an additional entropy source\n");
         rdrand_supported = true;
     }
@@ -129,7 +129,7 @@ static bool GetHWRand(unsigned char* ent32) {
 
 void RandAddSeed()
 {
-    // Seed with BTE performance counter
+    // Seed with CPU performance counter
     int64_t nCounter = GetPerformanceCounter();
     RAND_add(&nCounter, sizeof(nCounter), 1.5);
     memory_cleanse((void*)&nCounter, sizeof(nCounter));

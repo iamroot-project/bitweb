@@ -135,8 +135,8 @@
         <translation>仅支付全额的%1</translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>警告：中央处理器链址无效</translation>
+        <source>Warning: Invalid Bitweb address</source>
+        <translation>警告：糖链地址无效</translation>
     </message>
     </context>
 <context>

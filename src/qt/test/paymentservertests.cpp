@@ -196,6 +196,17 @@ void PaymentServerTests::paymentServerTests()
     QVERIFY(r.paymentRequest.IsInitialized());
     // Extract address and amount from the request
     QList<std::pair<CScript, CAmount> > sendingTos = r.paymentRequest.getPayTo();
+
+    // FIXME.BTE
+    // BEGIN - DEBUG
+    printf( "\n\n\n" );
+    printf( "%s =\n", "src/qt/test/paymentrequestdata.h/paymentrequest5_cert2_BASE64" );
+    printf( "***\n" );
+    printf( "%s\n", paymentrequest5_cert2_BASE64 );
+    printf( "***\n" );
+    printf( "\n\n\n" );
+    // END - DEBUG
+
     for (const std::pair<CScript, CAmount>& sendingTo : sendingTos) {
         CTxDestination dest;
         if (ExtractDestination(sendingTo.first, dest))

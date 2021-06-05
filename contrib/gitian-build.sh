@@ -1,4 +1,5 @@
 # Copyright (c) 2016 The Bitcoin Core developers
+# Copyright (c) 2018-2020 The Bitweb Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +17,10 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/SACSaveCoin/BTE
+
+# GITHUB repo select
+url=https://github.com/bitweb-project/bitweb
+
 proc=2
 mem=2000
 lxc=true
@@ -38,7 +42,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/bitweb/bitweb
+-u|--url	Specify the URL of the repository. Default is https://github.com/bitweb-project/bitweb
 -v|--verify 	Verify the Gitian build
 -b|--build	Do a Gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -229,8 +233,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/SACSaveCoin/BTE/gitian.sigs.git
-    git clone https://github.com/SACSaveCoin/BTE/bitweb-detached-sigs.git
+    git clone https://github.com/bitweb-project/gitian.sigs.git
+    git clone https://github.com/bitweb-project/bitweb-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -254,15 +258,23 @@ if [[ $build = true ]]
 then
 	# Make output folder
 	mkdir -p ./bitweb-binaries/${VERSION}
-
+	
 	# Build Dependencies
 	echo ""
 	echo "Building Dependencies"
 	echo ""
-	pushd ./gitian-builder
+	pushd ./gitian-builder	
 	mkdir -p inputs
-	wget -N -P inputs $osslPatchUrl
-	wget -N -P inputs $osslTarUrl
+
+  # FIXME.BTE
+  # wget is too slow so files pre-fixed - osslsigncode and XcodeSDK
+  # wget -N -P inputs $osslPatchUrl
+  echo 'a8c4e9cafba922f89de0df1f2152e7be286aba73f78505169bc351a7938dd911 inputs/osslsigncode-Backports-to-1.7.1.patch' | sha256sum -c
+  # wget -N -P inputs $osslTarUrl
+  echo 'f9a8cdb38b9c309326764ebc937cba1523a3a751a7ab05df3ecc99d18ae466c9 inputs/osslsigncode-1.7.1.tar.gz' | sha256sum -c
+  # Xcode SDK for macOS build
+  echo 'fc65dd34a3665a549cf2dc005c1d13fcead9ba17cadac6dfd0ebc46435729898 inputs/MacOSX10.11.sdk.tar.gz' | sha256sum -c
+
 	make -C ../bitweb/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
@@ -272,7 +284,7 @@ then
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
 	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitweb=${COMMIT} --url bitweb=${url} ../bitweb/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p "${signProg}" --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-linux.yml
 	    mv build/out/bitweb-*.tar.gz build/out/src/bitweb-*.tar.gz ../bitweb-binaries/${VERSION}
 	fi
 	# Windows
@@ -282,7 +294,7 @@ then
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
 	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitweb=${COMMIT} --url bitweb=${url} ../bitweb/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p "${signProg}" --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-win.yml
 	    mv build/out/bitweb-*-win-unsigned.tar.gz inputs/bitweb-win-unsigned.tar.gz
 	    mv build/out/bitweb-*.zip build/out/bitweb-*.exe ../bitweb-binaries/${VERSION}
 	fi
@@ -293,7 +305,7 @@ then
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
 	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitweb=${COMMIT} --url bitweb=${url} ../bitweb/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p "${signProg}" --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-osx.yml
 	    mv build/out/bitweb-*-osx-unsigned.tar.gz inputs/bitweb-osx-unsigned.tar.gz
 	    mv build/out/bitweb-*.tar.gz build/out/bitweb-*.dmg ../bitweb-binaries/${VERSION}
 	fi
@@ -328,10 +340,10 @@ then
 	echo "Verifying v${VERSION} Windows"
 	echo ""
 	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bitweb/contrib/gitian-descriptors/gitian-win.yml
-	# Mac OSX
+	# Mac OSX	
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
-	echo ""
+	echo ""	
 	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitweb/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
@@ -342,14 +354,14 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitweb/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitweb/contrib/gitian-descriptors/gitian-osx-signer.yml	
 	popd
 fi
 
 # Sign binaries
 if [[ $sign = true ]]
 then
-
+	
         pushd ./gitian-builder
 	# Sign Windows
 	if [[ $windows = true ]]
@@ -358,7 +370,7 @@ then
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
 	    ./bin/gbuild -i --commit signature=${COMMIT} ../bitweb/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p "${signProg}" --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-win-signer.yml
 	    mv build/out/bitweb-*win64-setup.exe ../bitweb-binaries/${VERSION}
 	    mv build/out/bitweb-*win32-setup.exe ../bitweb-binaries/${VERSION}
 	fi
@@ -369,7 +381,7 @@ then
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
 	    ./bin/gbuild -i --commit signature=${COMMIT} ../bitweb/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p "${signProg}" --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitweb/contrib/gitian-descriptors/gitian-osx-signer.yml
 	    mv build/out/bitweb-osx-signed.dmg ../bitweb-binaries/${VERSION}/bitweb-${VERSION}-osx.dmg
 	fi
 	popd

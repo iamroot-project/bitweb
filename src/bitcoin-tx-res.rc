@@ -17,7 +17,7 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "Bitweb"
-            VALUE "FileDescription",    "bitweb-tx (CLI Bitweb transaction editor utility)"
+            VALUE "FileDescription",    "bitweb-tx (CLI Bitcoin transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "bitweb-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR

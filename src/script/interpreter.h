@@ -18,8 +18,6 @@ class CScript;
 class CTransaction;
 class uint256;
 
-typedef std::vector<unsigned char> valtype;
-
 /** Signature hash types/flags */
 enum
 {

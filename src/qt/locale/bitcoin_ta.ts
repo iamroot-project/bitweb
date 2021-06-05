@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitweb</translation>
+        <translation>Bitcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitweb</translation>
+        <translation>Bitcoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -709,7 +709,7 @@
     <name>bitcoin-core</name>
     <message>
         <source>Bitcoin Core</source>
-        <translation>Bitweb மையம்</translation>
+        <translation>Bitcoin மையம்</translation>
     </message>
     <message>
         <source>(default: %u)</source>

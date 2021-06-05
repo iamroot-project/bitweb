@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2020 The Bitweb Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -113,6 +114,8 @@ void WalletModel::updateStatus()
         Q_EMIT encryptionStatusChanged(newEncryptionStatus);
 }
 
+// FIXME.BTE // SURE?
+// 120x faster than bitcoin
 void WalletModel::pollBalanceChanged()
 {
     // Get required locks upfront. This avoids the GUI from getting stuck on
@@ -129,12 +132,32 @@ void WalletModel::pollBalanceChanged()
     {
         fForceCheckBalanceChanged = false;
 
-        // Balance and number of transactions might have changed
-        cachedNumBlocks = chainActive.Height();
+        // BEGIN - DEBUG for checking height?
+        /*
+        LogPrint(BCLog::QT, "GUI:   %d = height \n", chainActive.Height());
+        LogPrint(BCLog::QT, "GUI:   %d = cached \n", cachedNumBlocks);
+        LogPrint(BCLog::QT, "GUI: height - cached = %d \n", (int)(chainActive.Height() - cachedNumBlocks));
+        */
+        // END - DEBUG for checking height?
 
-        checkBalanceChanged();
-        if(transactionTableModel)
-            transactionTableModel->updateConfirmations();
+        // FIXME.BTE // SURE?
+        // update every blocks >> 12 blocks // 5*12 = 60s
+        if(chainActive.Height() - cachedNumBlocks >= 12)
+        {
+            // BEGIN - DEBUG for checking polled?
+            /*
+            LogPrint(BCLog::QT, "GUI: \033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
+            LogPrint(BCLog::QT, "GUI: height - cached = %d \n", (int)(chainActive.Height() - cachedNumBlocks));
+            */
+            // END - DEBUG for checking polled?
+
+            // Balance and number of transactions might have changed
+            cachedNumBlocks = chainActive.Height();
+
+            checkBalanceChanged();
+            if(transactionTableModel)
+                transactionTableModel->updateConfirmations();
+        }
     }
 }
 

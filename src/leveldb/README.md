@@ -69,8 +69,8 @@ about half their original size.
 
     LevelDB:    version 1.1
     Date:       Sun May  1 12:11:26 2011
-    BTE:        4 x Intel(R) Core(TM)2 Quad BTE    Q6600  @ 2.40GHz
-    BTECache:   4096 KB
+    CPU:        4 x Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
+    CPUCache:   4096 KB
     Keys:       16 bytes each
     Values:     100 bytes each (50 bytes after compression)
     Entries:    1000000

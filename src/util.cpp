@@ -89,6 +89,7 @@ const char * const DEFAULT_DEBUGLOGFILE = "debug.log";
 ArgsManager gArgs;
 bool fPrintToConsole = false;
 bool fPrintToDebugLog = true;
+bool fPruneDebugLog = false; // FIXME.BTE // prune debug.log
 
 bool fLogTimestamps = DEFAULT_LOGTIMESTAMPS;
 bool fLogTimeMicros = DEFAULT_LOGTIMEMICROS;
@@ -372,6 +373,45 @@ int LogPrintStr(const std::string &str)
 
             ret = FileWriteStr(strTimestamped, fileout);
         }
+
+        // FIXME.BTE // prune debug.log
+        // BEGIN - PRUNE DEBUG.LOG
+        // If debug.log is over 10 MB (10*1000*1000), shrink to 1 MB (1*1000*1000)
+        // see "void ShrinkDebugFile()"
+        if (fPrintToDebugLog && fPruneDebugLog && !fPrintToConsole)
+        {
+            {
+                // Amount of debug.log to save at end when shrinking (must fit in memory)
+                constexpr size_t RECENT_DEBUG_HISTORY_SIZE = 1*1000*1000; // was (10 * 1000000)
+                // Scroll debug.log if it's getting too big
+                fs::path pathLog = GetDebugLogPath();
+                FILE* file = fsbridge::fopen(pathLog, "r");
+                // If debug.log file is more than 10x bigger the RECENT_DEBUG_HISTORY_SIZE
+                // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
+                if (file && fs::file_size(pathLog) > 10 * RECENT_DEBUG_HISTORY_SIZE) // was (11 * (RECENT_DEBUG_HISTORY_SIZE / 10)))
+                {
+                    // BEGIN - DEBUG FILESIZE
+                    printf("%s DEBUG.LOG PRUNED at %lu\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()).c_str(), fs::file_size(pathLog));
+                    // END - DEBUG FILESIZE
+
+                    // Restart the file with some of the end
+                    std::vector<char> vch(RECENT_DEBUG_HISTORY_SIZE, 0);
+                    fseek(file, -((long)vch.size()), SEEK_END);
+                    int nBytes = fread(vch.data(), 1, vch.size(), file);
+                    fclose(file);
+
+                    file = fsbridge::fopen(pathLog, "w");
+                    if (file)
+                    {
+                        fwrite(vch.data(), 1, nBytes, file);
+                        fclose(file);
+                    }
+                }
+                else if (file != nullptr)
+                    fclose(file);
+            }
+        }
+        // END - PRUNE LOG
     }
     return ret;
 }
@@ -644,7 +684,7 @@ void ClearDatadirCache()
     pathCached = fs::path();
     pathCachedNetSpecific = fs::path();
 }
-// (gArgs.GetArg("-conf", "bitweb.conf")
+
 fs::path GetConfigFile(const std::string& confPath)
 {
     fs::path pathConfigFile(confPath);
@@ -656,36 +696,9 @@ fs::path GetConfigFile(const std::string& confPath)
 
 void ArgsManager::ReadConfigFile(const std::string& confPath)
 {
-    fs::ifstream streamConfig(GetConfigFile(gArgs.GetArg("-conf", "bitweb.conf")));
-    if (!streamConfig.good()) {
-        // Create empty bitweb.conf if no bitweb.conf
-        FILE* configFile = fopen(GetConfigFile(gArgs.GetArg("-conf", "bitweb.conf")).string().c_str(), "a");
-        if(configFile != NULL) 
-        {
-            std::string strHeader = 
-                "# Bitweb3.0 Auto Configuration File!\n"
-                "# You can check explorer for more addnodes\n"
-				"#listen=1\n"
-				"#server=1\n"
-				"#daemon=1\n"
-				"#rpcuser=xxxx\n"
-				"#rpcpassword=xxxx\n"
-				"#rpcallowip=127.0.0.1\n"
-				"#txindex=1\n"
-                "addnode=118.193.69.172:1604\n"
-                "addnode=49.234.213.233:1604\n"
-                "addnode=119.201.131.108:1604\n"
-                "addnode=210.61.150.154:1604\n"
-                "addnode=75.119.132.113:1604\n"
-                "addnode=120.41.139.165:1604\n"
-                "addnode=87.110.172.238:1604\n"
-                "addnode=183.133.65.145:1604\n"
-                "addnode=168.138.71.12:1604\n";
-            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
-            fclose(configFile);
-            streamConfig.open(GetConfigFile(gArgs.GetArg("-conf", "bitweb.conf")));
-        }
-    }
+    fs::ifstream streamConfig(GetConfigFile(confPath));
+    if (!streamConfig.good())
+        return; // No bitcoin.conf file is OK
 
     {
         LOCK(cs_args);
@@ -974,10 +987,14 @@ std::string CopyrightHolders(const std::string& strPrefix)
 {
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
 
+    // FIXME.BTE // SURE?
+    // remove duplicated CopyrightHolders on SplashScreen and About
+    /*
     // Check for untranslated substitution to make sure Bitcoin Core copyright is not removed by accident
     if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Bitcoin Core") == std::string::npos) {
         strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
     }
+    */
     return strCopyrightHolders;
 }
 

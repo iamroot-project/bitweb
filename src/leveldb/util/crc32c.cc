@@ -285,7 +285,7 @@ static inline uint32_t LE_LOAD32(const uint8_t *p) {
   return DecodeFixed32(reinterpret_cast<const char*>(p));
 }
 
-// Determine if the BTE running this program can accelerate the CRC32C
+// Determine if the CPU running this program can accelerate the CRC32C
 // calculation.
 static bool CanAccelerateCRC32C() {
   if (!port::HasAcceleratedCRC32C())

@@ -24,7 +24,7 @@ Note:
 	.eabi_attribute 24, 1 @ Tag_ABI_align_needed = 8-byte
 	.eabi_attribute 25, 1 @ Tag_ABI_align_preserved = 8-byte, except leaf SP
 	.eabi_attribute 30, 2 @ Tag_ABI_optimization_goals = Aggressive Speed
-	.eabi_attribute 34, 1 @ Tag_BTE_unaligned_access = v6
+	.eabi_attribute 34, 1 @ Tag_CPU_unaligned_access = v6
 	.text
 
 	@ Field constants

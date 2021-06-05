@@ -62,7 +62,9 @@
 #include <QFontDatabase>
 #endif
 
+#ifdef WIN32
 static fs::detail::utf8_codecvt_facet utf8;
+#endif
 
 #if defined(Q_OS_MAC)
 extern double NSAppKitVersionNumber;
@@ -78,7 +80,7 @@ namespace GUIUtil {
 
 QString dateTimeStr(const QDateTime &date)
 {
-    return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm");
+    return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm:ss"); // FIXME.BTE
 }
 
 QString dateTimeStr(qint64 nTime)
@@ -212,7 +214,11 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
     //    which will lower-case it (and thus invalidate the address).
     if(uri.startsWith("bitweb://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 10, "bitweb:");
+        // Fix Length
+        // "bitcoin://", 10
+        // "litecoin://", 11
+        // "bitweb://", 13
+        uri.replace(0, 13, "bitweb:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -615,10 +621,10 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitcoin.lnk";
-    if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitcoin (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Bitcoin (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitweb.lnk";
+    if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet5"
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitweb (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Bitweb (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -870,12 +876,20 @@ void setClipboard(const QString& str)
 
 fs::path qstringToBoostPath(const QString &path)
 {
+#ifdef WIN32
     return fs::path(path.toStdString(), utf8);
+#else
+    return fs::path(path.toStdString());
+#endif
 }
 
 QString boostPathToQString(const fs::path &path)
 {
+#ifdef WIN32
     return QString::fromStdString(path.string(utf8));
+#else
+    return QString::fromStdString(path.string());
+#endif
 }
 
 QString formatDurationStr(int secs)
@@ -992,7 +1006,10 @@ QString formatBytes(uint64_t bytes)
     if(bytes < 1024 * 1024 * 1024)
         return QString(QObject::tr("%1 MB")).arg(bytes / 1024 / 1024);
 
-    return QString(QObject::tr("%1 GB")).arg(bytes / 1024 / 1024 / 1024);
+    // FIXME.BTE
+    // Do not display in GB
+    // return QString(QObject::tr("%1 GB")).arg(bytes / 1024 / 1024 / 1024);
+    return QString(QObject::tr("%1 MB")).arg(bytes / 1024 / 1024);
 }
 
 qreal calculateIdealFontSize(int width, const QString& text, QFont font, qreal minPointSize, qreal font_size) {

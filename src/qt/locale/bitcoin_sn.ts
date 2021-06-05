@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitweb</translation>
+        <translation>Bitcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -166,7 +166,7 @@
     <name>Intro</name>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitweb</translation>
+        <translation>Bitcoin</translation>
     </message>
     </context>
 <context>
@@ -194,8 +194,8 @@
         <translation>Marii </translation>
     </message>
     <message>
-        <source>Enter a Bitweb address (e.g. %1)</source>
-        <translation>Nyora kero ye Bitweb (sekuti %1)</translation>
+        <source>Enter a Bitcoin address (e.g. %1)</source>
+        <translation>Nyora kero ye Bitcoin (sekuti %1)</translation>
     </message>
     <message>
         <source>%1 d</source>

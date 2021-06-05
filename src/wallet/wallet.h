@@ -107,7 +107,8 @@ enum OutputType : int
     OUTPUT_TYPE_P2SH_SEGWIT,
     OUTPUT_TYPE_BECH32,
 
-    OUTPUT_TYPE_DEFAULT = OUTPUT_TYPE_LEGACY
+    // OUTPUT_TYPE_DEFAULT = OUTPUT_TYPE_P2SH_SEGWIT
+    OUTPUT_TYPE_DEFAULT = OUTPUT_TYPE_BECH32 // FIXME.BTE // set default address as BECH32
 };
 
 extern OutputType g_address_type;

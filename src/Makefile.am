@@ -103,6 +103,9 @@ BITCOIN_CORE_H = \
   hashdb.h \
   httprpc.h \
   httpserver.h \
+  index/addressindex.h \
+  index/spentindex.h \
+  index/timestampindex.h \
   indirectmap.h \
   init.h \
   key.h \
@@ -259,6 +262,7 @@ libbitcoin_wallet_a_SOURCES = \
 # crypto primitives library
 crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
 crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitcoin_crypto_a_CFLAGS = $(PIE_FLAGS) -Wall -O2 -fomit-frame-pointer
 crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
@@ -370,6 +374,7 @@ libbitcoin_util_a_SOURCES = \
 
 if GLIBC_BACK_COMPAT
 libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
+AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
 # cli: shared between bitcoin-cli and bitcoin-qt

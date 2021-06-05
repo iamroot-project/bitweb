@@ -6,11 +6,12 @@
 #include <base58.h>
 #include <chain.h>
 #include <clientversion.h>
-#include <consensus/consensus.h>
 #include <core_io.h>
 #include <crypto/ripemd160.h>
 #include <init.h>
 #include <validation.h>
+#include <txmempool.h>
+#include <consensus/consensus.h>
 #include <httpserver.h>
 #include <net.h>
 #include <netbase.h>
@@ -18,9 +19,6 @@
 #include <rpc/server.h>
 #include <rpc/util.h>
 #include <timedata.h>
-#ifdef ENABLE_BITCORE_RPC
-#include <txmempool.h>
-#endif
 #include <util.h>
 #include <utilstrencodings.h>
 #ifdef ENABLE_WALLET
@@ -153,50 +151,6 @@ public:
 };
 #endif
 
-#ifdef ENABLE_BITCORE_RPC
-UniValue getinfo(const JSONRPCRequest& request)
-{
-    if (request.fHelp || request.params.size() != 0)
-        throw std::runtime_error(
-            "getinfo\n"
-            "Returns an object containing various state info.\n"
-            "\nResult:\n"
-            "{\n"
-            "  \"version\": xxxxx,           (numeric) the server version\n"
-            "  \"protocolversion\": xxxxx,   (numeric) the protocol version\n"
-            "  \"blocks\": xxxxxx,           (numeric) the current number of blocks processed in the server\n"
-            "  \"timeoffset\": xxxxx,        (numeric) the time offset\n"
-            "  \"connections\": xxxxx,       (numeric) the number of connections\n"
-            "  \"proxy\": \"host:port\",       (string, optional) the proxy used by the server\n"
-            "  \"difficulty\": xxxxxx,       (numeric) the current difficulty\n"
-            "  \"testnet\": true|false,      (boolean) if the server is using testnet or not\n"
-            "  \"relayfee\": x.xxxx,         (numeric) minimum relay fee for transactions in " + CURRENCY_UNIT + "/kB\n"
-            "  \"errors\": \"...\"             (string) any error messages\n"
-            "}\n"
-            "\nExamples:\n"
-            + HelpExampleCli("getinfo", "")
-            + HelpExampleRpc("getinfo", "")
-        );
-
-    proxyType proxy;
-    GetProxy(NET_IPV4, proxy);
-
-    UniValue obj(UniValue::VOBJ);
-    obj.push_back(Pair("version",             CLIENT_VERSION));
-    obj.push_back(Pair("protocolversion",     PROTOCOL_VERSION));
-    obj.push_back(Pair("blocks",              (int)chainActive.Height()));
-    obj.push_back(Pair("timeoffset",          GetTimeOffset()));
-    if(g_connman)
-        obj.push_back(Pair("connections",     (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL)));
-    obj.push_back(Pair("proxy",               (proxy.IsValid() ? proxy.proxy.ToStringIPPort() : std::string())));
-    obj.push_back(Pair("difficulty",          (double)GetDifficulty()));
-    obj.push_back(Pair("testnet",             Params().NetworkIDString() == CBaseChainParams::TESTNET));
-    obj.push_back(Pair("relayfee",            ValueFromAmount(::minRelayTxFee.GetFeePerK())));
-    obj.push_back(Pair("errors",              GetWarnings("statusbar")));
-    return obj;
-}
-#endif
-
 UniValue validateaddress(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
@@ -300,34 +254,37 @@ UniValue validateaddress(const JSONRPCRequest& request)
     return ret;
 }
 
-#ifdef ENABLE_BITCORE_RPC
-bool getAddressesFromParams(const UniValue& params, std::vector<std::pair<uint160, int> > &addresses)
+
+static bool getAddressesFromParams(const UniValue& params, std::vector<std::pair<uint160, int> > &addresses)
 {
     if (params[0].isStr()) {
+        CTxDestination dest = DecodeDestination(params[0].get_str());
+        CScript scriptPubKey = GetScriptForDestination(dest);
         uint160 hashBytes;
-        int type = 0;
-        if (!DecodeIndexKey(params[0].get_str(), hashBytes, type)) {
+        int addressType = 0;
+
+        if (scriptPubKey.IsPayToScriptHash()) {
+            hashBytes = uint160(std::vector <unsigned char>(scriptPubKey.begin() + 2, scriptPubKey.begin() + 22));
+            addressType = 2;
+        } else if (scriptPubKey.IsPayToPublicKeyHash()) {
+            hashBytes = uint160(std::vector <unsigned char>(scriptPubKey.begin() + 3, scriptPubKey.begin() + 23));
+            addressType = 1;
+        } else if (scriptPubKey.IsPayToWitnessPubkeyHash()) {
+            hashBytes = uint160(std::vector <unsigned char>(scriptPubKey.begin() + 2, scriptPubKey.end()));
+            addressType = 1;
+        } else if (scriptPubKey.IsPayToWitnessScriptHash()) {
+            hashBytes = Hash160(std::vector <unsigned char> (scriptPubKey.begin() + 2, scriptPubKey.end()));
+            addressType = 2;
+        } else {
+            hashBytes.SetNull();
+            addressType = 0;
+        }
+
+        if (addressType == 0) {
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid address");
         }
-        addresses.push_back(std::make_pair(hashBytes, type));
-    } else if (params[0].isObject()) {
 
-        UniValue addressValues = find_value(params[0].get_obj(), "addresses");
-        if (!addressValues.isArray()) {
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Addresses is expected to be an array");
-        }
-
-        std::vector<UniValue> values = addressValues.getValues();
-
-        for (std::vector<UniValue>::iterator it = values.begin(); it != values.end(); ++it) {
-
-            uint160 hashBytes;
-            int type = 0;
-            if (!DecodeIndexKey(it->get_str(), hashBytes, type)) {
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid address");
-            }
-            addresses.push_back(std::make_pair(hashBytes, type));
-        }
+        addresses.push_back(std::make_pair(hashBytes, addressType));
     } else {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid address");
     }
@@ -522,28 +479,24 @@ UniValue getaddressbalance(const JSONRPCRequest& request)
 
     CAmount balance = 0;
     CAmount received = 0;
-    CAmount immature = 0;
 
     for (std::vector<std::pair<CAddressIndexKey, CAmount> >::const_iterator it=addressIndex.begin(); it!=addressIndex.end(); it++) {
         if (it->second > 0) {
             received += it->second;
         }
         balance += it->second;
-        if (it->first.txindex == 1 && ((chainActive.Height() - it->first.blockHeight) < COINBASE_MATURITY))
-            immature += it->second; //immature stake outputs
     }
 
     UniValue result(UniValue::VOBJ);
     result.pushKV("balance", balance);
     result.pushKV("received", received);
-    result.pushKV("immature", immature);
 
     return result;
 }
 
 UniValue getaddressutxos(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() != 1)
+    if (request.fHelp || request.params.size() < 1 || request.params.size() > 3)
         throw std::runtime_error(
             "getaddressutxos\n"
             "\nReturns all unspent outputs for an address (requires addressindex to be enabled).\n"
@@ -572,12 +525,14 @@ UniValue getaddressutxos(const JSONRPCRequest& request)
             + HelpExampleRpc("getaddressutxos", "{\"addresses\": [\"12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX\"]}")
             );
 
+    CAmount requiredAmount = 0;
+    if (!request.params[1].isNull()) {
+        requiredAmount = AmountFromValue(request.params[1]);
+    }
+
     bool includeChainInfo = false;
-    if (request.params[0].isObject()) {
-        UniValue chainInfo = find_value(request.params[0].get_obj(), "chainInfo");
-        if (chainInfo.isBool()) {
-            includeChainInfo = chainInfo.get_bool();
-        }
+    if (!request.params[2].isNull()) {
+        includeChainInfo = request.params[2].get_bool();
     }
 
     std::vector<std::pair<uint160, int> > addresses;
@@ -597,8 +552,12 @@ UniValue getaddressutxos(const JSONRPCRequest& request)
     std::sort(unspentOutputs.begin(), unspentOutputs.end(), heightSort);
 
     UniValue utxos(UniValue::VARR);
-
+    CAmount total = 0;
     for (std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue> >::const_iterator it=unspentOutputs.begin(); it!=unspentOutputs.end(); it++) {
+        if (requiredAmount > 0 && total >= requiredAmount) {
+            break;
+        }
+
         UniValue output(UniValue::VOBJ);
         std::string address;
         if (!getAddressFromIndex(it->first.type, it->first.hashBytes, address)) {
@@ -611,7 +570,10 @@ UniValue getaddressutxos(const JSONRPCRequest& request)
         output.pushKV("script", HexStr(it->second.script.begin(), it->second.script.end()));
         output.pushKV("satoshis", it->second.satoshis);
         output.pushKV("height", it->second.blockHeight);
+
         utxos.push_back(output);
+
+        total += it->second.satoshis;
     }
 
     if (includeChainInfo) {
@@ -773,7 +735,7 @@ UniValue getblockhashes(const JSONRPCRequest& request)
 
 UniValue getspentinfo(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() != 1 || !request.params[0].isObject())
+    if (request.fHelp || request.params.size() != 1)
         throw std::runtime_error(
             "getspentinfo\n"
             "\nReturns the txid and index where an output is spent.\n"
@@ -793,29 +755,37 @@ UniValue getspentinfo(const JSONRPCRequest& request)
             + HelpExampleRpc("getspentinfo", "{\"txid\": \"0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9\", \"index\": 0}")
         );
 
-    UniValue txidValue = find_value(request.params[0].get_obj(), "txid");
-    UniValue indexValue = find_value(request.params[0].get_obj(), "index");
-
-    if (!txidValue.isStr() || !indexValue.isNum()) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid txid or index");
+    if (!request.params[0].isStr()) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Txid must be a string");
     }
 
-    uint256 txid = ParseHashV(txidValue, "txid");
-    int outputIndex = indexValue.get_int();
+    uint256 txid(ParseHashV(request.params[0].get_str(), "txid"));
+    UniValue result(UniValue::VARR);
+    CTransactionRef tx;
+    uint256 hashBlock;
 
-    CSpentIndexKey key(txid, outputIndex);
-    CSpentIndexValue value;
-
-    if (!GetSpentIndex(key, value)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Unable to get spent info");
+    if (!GetTransaction(txid, tx, Params().GetConsensus(), hashBlock)) {
+        throw JSONRPCError(RPC_INTERNAL_ERROR, std::string("Unexpected internal error (tx index seems corrupt)"));
     }
 
-    UniValue obj(UniValue::VOBJ);
-    obj.pushKV("txid", value.txid.GetHex());
-    obj.pushKV("index", (int)value.inputIndex);
-    obj.pushKV("height", value.blockHeight);
+    for (unsigned int i = 0; i < tx->vout.size(); ++i) {
+        UniValue obj(UniValue::VOBJ);
+        CSpentIndexKey key(txid, i);
+        CSpentIndexValue value;
 
-    return obj;
+        if (!GetSpentIndex(key, value)) {
+            obj.pushKV("spent", false);
+        } else {
+            obj.pushKV("spent", true);
+            obj.pushKV("txid", txid.GetHex());
+            obj.pushKV("height", value.blockHeight);
+            obj.pushKV("vin", (int)value.inputIndex);
+        }
+
+        result.push_back(obj);
+    }
+
+    return result;
 }
 
 UniValue getaddresstxids(const JSONRPCRequest& request)
@@ -852,14 +822,14 @@ UniValue getaddresstxids(const JSONRPCRequest& request)
 
     int start = 0;
     int end = 0;
-    if (request.params[0].isObject()) {
-        UniValue startValue = find_value(request.params[0].get_obj(), "start");
-        UniValue endValue = find_value(request.params[0].get_obj(), "end");
-        if (startValue.isNum() && endValue.isNum()) {
-            start = startValue.get_int();
-            end = endValue.get_int();
-        }
-    }
+    // if (request.params[0].isObject()) {
+    //     UniValue startValue = find_value(request.params[0].get_obj(), "start");
+    //     UniValue endValue = find_value(request.params[0].get_obj(), "end");
+    //     if (startValue.isNum() && endValue.isNum()) {
+    //         start = startValue.get_int();
+    //         end = endValue.get_int();
+    //     }
+    // }
 
     std::vector<std::pair<CAddressIndexKey, CAmount> > addressIndex;
 
@@ -899,7 +869,6 @@ UniValue getaddresstxids(const JSONRPCRequest& request)
 
     return result;
 }
-#endif
 
 // Needed even with !ENABLE_WALLET, to pass (ignored) pointers around
 class CWallet;
@@ -1272,6 +1241,18 @@ UniValue echo(const JSONRPCRequest& request)
     return request.params;
 }
 
+static UniValue getinfo_deprecated(const JSONRPCRequest& request)
+{
+    throw JSONRPCError(RPC_METHOD_NOT_FOUND,
+        "getinfo\n"
+        "\nThis call was removed in version 0.16.0. Use the appropriate fields from:\n"
+        "- getblockchaininfo: blocks, difficulty, chain\n"
+        "- getnetworkinfo: version, protocolversion, timeoffset, connections, proxy, relayfee, warnings\n"
+        "- getwalletinfo: balance, keypoololdest, keypoolsize, paytxfee, unlocked_until, walletversion\n"
+        "\nbitweb-cli has the option -getinfo to collect and format these in the old format."
+    );
+}
+
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
@@ -1286,17 +1267,15 @@ static const CRPCCommand commands[] =
     { "hidden",             "setmocktime",            &setmocktime,            {"timestamp"}},
     { "hidden",             "echo",                   &echo,                   {"arg0","arg1","arg2","arg3","arg4","arg5","arg6","arg7","arg8","arg9"}},
     { "hidden",             "echojson",               &echo,                   {"arg0","arg1","arg2","arg3","arg4","arg5","arg6","arg7","arg8","arg9"}},
+    { "hidden",             "getinfo",                &getinfo_deprecated,     {}},
 
-#ifdef ENABLE_BITCORE_RPC
-    { "control",            "getinfo",                &getinfo,                {}},
-    { "util",               "getaddresstxids",        &getaddresstxids,        {"addresses"} },
-    { "util",               "getaddressdeltas",       &getaddressdeltas,       {"addresses"} },
-    { "util",               "getaddressbalance",      &getaddressbalance,      {"addresses"} },
-    { "util",               "getaddressutxos",        &getaddressutxos,        {"addresses"} },
-    { "util",               "getaddressmempool",      &getaddressmempool,      {"addresses"} },
+    { "util",               "getaddresstxids",        &getaddresstxids,        {"address"} },
+    { "util",               "getaddressdeltas",       &getaddressdeltas,       {"address"} },
+    { "util",               "getaddressbalance",      &getaddressbalance,      {"address"} },
+    { "util",               "getaddressutxos",        &getaddressutxos,        {"address", "amount"} },
+    { "util",               "getaddressmempool",      &getaddressmempool,      {"address"} },
     { "util",               "getblockhashes",         &getblockhashes,         {"high","low","options"} },
     { "util",               "getspentinfo",           &getspentinfo,           {"argument"} },
-#endif
 };
 
 void RegisterMiscRPCCommands(CRPCTable &t)

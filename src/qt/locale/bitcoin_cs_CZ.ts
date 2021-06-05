@@ -167,7 +167,7 @@
     </message>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitweb</translation>
+        <translation>Bitcoin</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -298,7 +298,7 @@
     <name>Intro</name>
     <message>
         <source>Bitcoin</source>
-        <translation>Bitweb</translation>
+        <translation>Bitcoin</translation>
     </message>
     </context>
 <context>

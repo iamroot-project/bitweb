@@ -24,7 +24,7 @@ static struct perf_event_attr attr;
 void perf_init(void)
 {
     attr.type = PERF_TYPE_HARDWARE;
-    attr.config = PERF_COUNT_HW_BTE_CYCLES;
+    attr.config = PERF_COUNT_HW_CPU_CYCLES;
     fd = syscall(__NR_perf_event_open, &attr, 0, -1, -1, 0);
 }
 

@@ -62,12 +62,12 @@
         <translation>받은 주소들</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>시피유체인을 보내는 계좌 주소입니다. 코인을 보내기 전에 잔고와 받는 주소를 항상 확인하세요.</translation>
+        <source>These are your Bitweb addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>슈가체인을 보내는 계좌 주소입니다. 코인을 보내기 전에 잔고와 받는 주소를 항상 확인하세요.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>시피유체인을 받을 수 있는 계좌 주소입니다. 매 거래마다 새로운 주소 사용을 권장합니다. </translation>
+        <source>These are your Bitweb addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>슈가체인을 받을 수 있는 계좌 주소입니다. 매 거래마다 새로운 주소 사용을 권장합니다. </translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Show password</source>
-        <translation>비밀번호를 입력하세요</translation>
+        <translation>비밀번호 표시</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -172,20 +172,20 @@
         <translation>지갑 암호화 승인</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>경고: 만약 암호화 된 지갑의 비밀번호를 잃어버릴 경우, &lt;b&gt;모든 시피유체인들을 잃어버릴 수 있습니다&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITWEBS&lt;/b&gt;!</source>
+        <translation>경고: 만약 암호화 된 지갑의 비밀번호를 잃어버릴 경우, &lt;b&gt;모든 슈가체인들을 잃어버릴 수 있습니다&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>지갑 암호화를 허용하시겠습니까?</translation>
+        <translation>지갑 암호화를 정말로 하시겠습니까?</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
         <translation>지갑 암호화 완료</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>암호화 처리 과정을 끝내기 위해 %1을 종료합니다. 지갑 암호화는 컴퓨터로의 멀웨어 감염으로 인한 시피유체인 도난을 완전히 방지할 수 없음을 기억하세요.</translation>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitwebs from being stolen by malware infecting your computer.</source>
+        <translation>암호화 처리 과정을 끝내기 위해 %1을 종료합니다. 지갑 암호화는 컴퓨터의 멀웨어 감염으로 인한 슈가체인 도난을 완전히 방지할 수는 없습니다.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>지갑 암호화는 내부 에러로 인해 실패했습니다.  당신의 지갑은 암호화 되지 않았습니다.</translation>
+        <translation>지갑 암호화는 내부 에러로 인해 실패했습니다. 당신의 지갑은 암호화 되지 않았습니다.</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
@@ -232,7 +232,7 @@
     </message>
     <message>
         <source>Banned Until</source>
-        <translation>다음과 같은 상황이 될 때까지 계정 정지됩니다.</translation>
+        <translation>다음과 같은 상황이 될 때까지 차단됩니다.</translation>
     </message>
 </context>
 <context>
@@ -342,8 +342,8 @@
         <translation>디스크에서 블록 다시 색인중...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>시피유체인 주소로 코인 전송</translation>
+        <source>Send coins to a Bitweb address</source>
+        <translation>슈가체인 주소로 코인 전송</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -366,8 +366,8 @@
         <translation>메시지 확인(&amp;V)...</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>시피유체인</translation>
+        <source>Bitweb</source>
+        <translation>슈가체인</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -394,12 +394,12 @@
         <translation>지갑에 포함된 개인키 암호화하기</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>지갑 주소가 본인 소유인지 증명하기 위해 시피유체인 주소에 서명할 수 있습니다.</translation>
+        <source>Sign messages with your Bitweb addresses to prove you own them</source>
+        <translation>지갑 주소가 본인 소유인지 증명하기 위해 슈가체인 주소에 서명할 수 있습니다.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>시피유체인 주소의 전자 서명 확인을 위해 첨부된 메시지가 있을 경우 이를 검증할 수 있습니다.</translation>
+        <source>Verify messages to ensure they were signed with specified Bitweb addresses</source>
+        <translation>슈가체인 주소의 전자 서명 확인을 위해 첨부된 메시지가 있을 경우 이를 검증할 수 있습니다.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -418,8 +418,8 @@
         <translation>툴바 색인표</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>지불 요청하기 (QR코드와 시피유체인이 생성됩니다: URIs)</translation>
+        <source>Request payments (generates QR codes and bitweb: URIs)</source>
+        <translation>지불 요청하기 (QR코드와 슈가체인이 생성됩니다: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -430,7 +430,7 @@
         <translation>한번 이상 사용된 받는 주소와 주소 제목의 목록을 보여줍니다.</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
+        <source>Open a bitweb: URI or payment request</source>
         <translation>bitweb: URI 또는 지불요청 열기</translation>
     </message>
     <message>
@@ -438,8 +438,8 @@
         <translation>명령줄 옵션(&amp;C)</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>시피유체인 네트워크에 %n개의 연결이 활성화되어 있습니다.</numerusform></translation>
+        <source>%n active connection(s) to Bitweb network</source>
+        <translation><numerusform>슈가체인 네트워크에 %n개의 연결이 활성화되어 있습니다.</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -482,8 +482,8 @@
         <translation>현재까지</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>사용할 수 있는 시피유체인 명령줄 옵션 목록을 가져오기 위해 %1 도움말 메시지를 표시합니다.</translation>
+        <source>Show the %1 help message to get a list with possible Bitweb command-line options</source>
+        <translation>사용할 수 있는 슈가체인 명령줄 옵션 목록을 가져오기 위해 %1 도움말 메시지를 표시합니다.</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -552,8 +552,8 @@
         <translation>지갑이 &lt;b&gt;암호화&lt;/b&gt; 되었고 현재 &lt;b&gt;잠겨져&lt;/b&gt; 있습니다</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>치명적인 오류가 발생했습니다. 시피유체인을 더이상 안전하게 진행할 수 없어 곧 종료합니다.</translation>
+        <source>A fatal error occurred. Bitweb can no longer continue safely and will quit.</source>
+        <translation>치명적인 오류가 발생했습니다. 슈가체인을 더이상 안전하게 진행할 수 없어 곧 종료합니다.</translation>
     </message>
 </context>
 <context>
@@ -746,8 +746,8 @@
         <translation>보내는 주소 편집</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>입력한 "%1" 주소는 올바른 시피유체인 주소가 아닙니다.</translation>
+        <source>The entered address "%1" is not a valid Bitweb address.</source>
+        <translation>입력한 "%1" 주소는 올바른 슈가체인 주소가 아닙니다.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -821,7 +821,7 @@
     </message>
     <message>
         <source>Set language, for example "de_DE" (default: system locale)</source>
-        <translation>"ko_KR"와 같이 언어를 설정하십시오 (기본값: 시스템 로캘)</translation>
+        <translation>"ko_KR"와 같이 언어를 설정하십시오 (기본값: 시스템 로컬)</translation>
     </message>
     <message>
         <source>Start minimized</source>
@@ -848,7 +848,7 @@
     </message>
     <message>
         <source>Welcome to %1.</source>
-        <translation>%1에 오신것을 환영합니다.</translation>
+        <translation>%1를 설치해 주셔서 감사합니다.</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
@@ -856,7 +856,7 @@
     </message>
     <message>
         <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
-        <translation>확인을 클릭하면 %1은 모든 %4블록 체인 (%2GB) 장부를 %3 안에 다운로드하고 처리하기 시작합니다.  이는 %4가 시작될 때 생성된 가장 오래된 트랜잭션부터 시작합니다.</translation>
+        <translation>확인을 클릭하면 %1은 모든 %4 블록 체인 (%2GB) 장부를 다운로드하고 검증하기 시작합니다. 이는 %3년에 %4이 시작될 때 생성된 가장 오래된 트랜잭션부터 시작합니다.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
@@ -875,8 +875,8 @@
         <translation>커스텀 데이터 폴더 사용:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>시피유체인</translation>
+        <source>Bitweb</source>
+        <translation>슈가체인</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -887,7 +887,7 @@
         <translation>약 %1GB의 데이터가 이 디렉토리에 저장됩니다.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
+        <source>%1 will download and store a copy of the Bitweb block chain.</source>
         <translation>%1은 Bitweb 블록 체인의 사본을 다운로드하여 저장합니다.</translation>
     </message>
     <message>
@@ -918,12 +918,12 @@
         <translation>유형</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>최근 거래는 아직 보이지 않을 것입니다, 그러므로 당신의 지갑의 잔액이 틀릴 수도 있습니다. 이 정보는 시피유체인 네트워크와 완전한 동기화가 완료되면 아래의 설명과 같이 정확해집니다.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitweb network, as detailed below.</source>
+        <translation>최근 거래는 아직 보이지 않을 것입니다, 그러므로 당신의 지갑의 잔액이 틀릴 수도 있습니다. 이 정보는 슈가체인 네트워크와 완전한 동기화가 완료되면 아래의 설명과 같이 정확해집니다.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>아직 표시되지 않은 거래의 영향을 받는 시피유체인을 사용하려고 하는 것은 네트워크에서 허가되지 않습니다.</translation>
+        <source>Attempting to spend bitwebs that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>아직 표시되지 않은 거래의 영향을 받는 슈가체인을 사용하려고 하는 것은 네트워크에서 허가되지 않습니다.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1092,7 +1092,7 @@
         <translation>검증되지 않은 잔돈 쓰기 (&amp;S)</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Bitweb client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>라우터에서 Bitweb 클라이언트 포트를 자동적으로 엽니다. 라우터에서 UPnP를 지원하고 활성화 했을 경우에만 동작합니다.</translation>
     </message>
     <message>
@@ -1108,8 +1108,8 @@
         <translation>연결 요청을 허용합니다.</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>SOCKS5 프록시를 통해 시피유체인 네트워크 연결</translation>
+        <source>Connect to the Bitweb network through a SOCKS5 proxy.</source>
+        <translation>SOCKS5 프록시를 통해 슈가체인 네트워크 연결</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1144,8 +1144,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Tor 서비스를 경유하여 시피유체인 네트워크에 연결하기 위해 분리된 SOCKS5 프록시를 사용.</translation>
+        <source>Connect to the Bitweb network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Tor 서비스를 경유하여 슈가체인 네트워크에 연결하기 위해 분리된 SOCKS5 프록시를 사용.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1189,7 +1189,7 @@
     </message>
     <message>
         <source>&amp;Third party transaction URLs</source>
-        <translation>&amp;제 3자 거래 URL들</translation>
+        <translation>&amp;서드-파티 거래 URL들</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -1251,8 +1251,8 @@
         <translation>유형</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>표시된 정보가 오래된 것 같습니다. 시피유체인 네트워크에 연결하고 난 다음에 지갑을 자동으로 동기화 하지만, 아직 과정이 끝나지는 않았습니다.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitweb network after a connection is established, but this process has not completed yet.</source>
+        <translation>표시된 정보가 오래된 것 같습니다. 슈가체인 네트워크에 연결하고 난 다음에 지갑을 자동으로 동기화 하지만, 아직 과정이 끝나지는 않았습니다.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1260,7 +1260,7 @@
     </message>
     <message>
         <source>Available:</source>
-        <translation>사용 가능</translation>
+        <translation>사용가능</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -1304,7 +1304,7 @@
     </message>
     <message>
         <source>Recent transactions</source>
-        <translation>최근 거래</translation>
+        <translation>최근거래</translation>
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
@@ -1326,8 +1326,8 @@
         <translation>지불 요청 오류</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>시피유체인을 시작할 수 없습니다: 지급제어기를 클릭하세요</translation>
+        <source>Cannot start bitweb: click-to-pay handler</source>
+        <translation>슈가체인을 시작할 수 없습니다: 지급제어기를 클릭하세요</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1342,8 +1342,8 @@
         <translation>잘못된 지불 주소입니다 %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URI의 파싱에 문제가 발생했습니다. 잘못된 시피유체인 주소나 URI 파라미터 구성에 오류가 존재할 수 있습니다.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Bitweb address or malformed URI parameters.</source>
+        <translation>URI의 파싱에 문제가 발생했습니다. 잘못된 슈가체인 주소나 URI 파라미터 구성에 오류가 존재할 수 있습니다.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1391,11 +1391,11 @@
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
-        <translation>%1과 소통하는데 에러: %2</translation>
+        <translation>%1과 연결하는데 에러: %2</translation>
     </message>
     <message>
         <source>Payment request cannot be parsed!</source>
-        <translation>지불요청을 파싱할 수 없습니다.</translation>
+        <translation>지불요청을 파싱할 수 없습니다!</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -1445,7 +1445,7 @@
     </message>
     <message>
         <source>Enter a Bitweb address (e.g. %1)</source>
-        <translation>시피유체인 주소를 입력하기 (예. %1)</translation>
+        <translation>슈가체인 주소를 입력하기 (예. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1814,11 +1814,11 @@
     </message>
     <message>
         <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.</source>
-        <translation>경고 : 사기꾼이 사용자에게 여기에 명령을 입력하게 하여 지갑 내용을 훔칠수 있다는 사실을 알려드립니다. 명령어를 완전히 이해하지 못한다면 콘솔을 사용하지 마십시오.</translation>
+        <translation>경고: 사기꾼이 사용자에게 여기에 명령을 입력하게 하여 지갑 내용을 훔칠수 있다는 사실을 알려드립니다. 명령어를 완전히 이해하지 못한다면 콘솔을 사용하지 마십시오.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
-        <translation>네트워크 활동이 정지됨.</translation>
+        <translation>네트워크 활동이 정지됨</translation>
     </message>
     <message>
         <source>(node id: %1)</source>
@@ -1868,8 +1868,8 @@
         <translation>메시지(&amp;M):</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>지불 요청에 첨부되는 선택가능한 메시지 입니다. 이 메세지는 요청이 열릴 때 표시될 것 입니다. 메모: 이 메시지는 시피유체인 네트워크로 전송되지 않습니다.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitweb network.</source>
+        <translation>지불 요청에 첨부되는 선택가능한 메시지 입니다. 이 메세지는 요청이 열릴 때 표시될 것 입니다. 메모: 이 메시지는 슈가체인 네트워크로 전송되지 않습니다.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1897,7 +1897,7 @@
     </message>
     <message>
         <source>Generate native segwit (Bech32) address</source>
-        <translation>Bech32 세그윗 주소 생성</translation>
+        <translation>네이티브 세그윗 (Bech32) 주소 생성</translation>
     </message>
     <message>
         <source>Requested payments history</source>
@@ -2030,7 +2030,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>코인들 보내기</translation>
+        <translation>코인 보내기</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -2113,8 +2113,8 @@
         <translation>숨기기</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>블록의 용량보다 거래의 용량이 작은 경우에는 최소한의 수수료만으로도 충분합니다. 그러나 시피유체인 네트워크의 처리량보다 더 많은 거래 요구는 영원히 검증이 안 될 수도 있습니다.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitweb transactions than the network can process.</source>
+        <translation>블록의 용량보다 거래의 용량이 작은 경우에는 최소한의 수수료만으로도 충분합니다. 그러나 슈가체인 네트워크의 처리량보다 더 많은 거래 요구는 영원히 검증이 안 될 수도 있습니다.</translation>
     </message>
     <message>
         <source>(read the tooltip)</source>
@@ -2158,8 +2158,7 @@
     </message>
     <message>
         <source>With Replace-By-Fee (BIP-125) you can increase a transaction's fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
-        <translation>Replace-By-Fee (BIP-125) 옵션은 보낸 거래의 수수료 상향을 지원해 줍니다.
-이 옵션이 없을 경우 거래 지연을 방지하기 위해 더 높은 수수료가 요구됩니다.</translation>
+        <translation>Replace-By-Fee (BIP-125) 옵션은 보낸 거래의 수수료 상향을 지원해 줍니다. 이 옵션이 없을 경우 거래 지연을 방지하기 위해 더 높은 수수료가 요구됩니다.</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -2207,7 +2206,7 @@
     </message>
     <message>
         <source>%1 (%2 blocks)</source>
-        <translation>%1(%2 블록스)</translation>
+        <translation>%1(%2 블록)</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2235,7 +2234,7 @@
     </message>
     <message>
         <source>Not signalling Replace-By-Fee, BIP-125.</source>
-        <translation>Replace-By-Fee, BIP-125 지원 안함</translation>
+        <translation>Replace-By-Fee, BIP-125 지원 안함.</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -2243,7 +2242,7 @@
     </message>
     <message>
         <source>The recipient address is not valid. Please recheck.</source>
-        <translation>수령인 주소가 정확하지 않습니다. 재확인 바랍니다</translation>
+        <translation>수령인 주소가 정확하지 않습니다. 재확인 바랍니다.</translation>
     </message>
     <message>
         <source>The amount to pay must be larger than 0.</source>
@@ -2286,8 +2285,8 @@
         <translation><numerusform>%n 블록 안에 승인이 시작될 것으로 추정됩니다.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>경고: 잘못된 시피유체인주소입니다</translation>
+        <source>Warning: Invalid Bitweb address</source>
+        <translation>경고: 잘못된 슈가체인 주소 입니다</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2329,8 +2328,8 @@
         <translation>이것은 정상적인 지불입니다.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
-        <translation>이 시피유체인 주소로 송금됩니다</translation>
+        <source>The Bitweb address to send the payment to</source>
+        <translation>이 슈가체인 주소로 송금됩니다</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2349,7 +2348,7 @@
         <translation>항목을 지웁니다</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitwebs than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation>수수료가 송금되는 금액에서 공제됩니다. 수령자는 금액 필드에서 입력한 금액보다 적은 금액을 전송받게 됩니다. 받는 사람이 여러 명인 경우 수수료는 균등하게 나누어집니다.</translation>
     </message>
     <message>
@@ -2377,8 +2376,8 @@
         <translation>사용된 주소 목록에 새 주소를 추가하기 위해 라벨 이름을 입력해 주세요. </translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>시피유체인에 첨부된 메시지: 참고용으로 거래와 함께 저장될 URI. 메모: 이 메시지는 시피유체인 네트워크로 전송되지 않습니다.</translation>
+        <source>A message that was attached to the bitweb: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitweb network.</source>
+        <translation>슈가체인에 첨부된 메시지: 참고용으로 거래와 함께 저장될 URI. 메모: 이 메시지는 슈가체인 네트워크로 전송되지 않습니다.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2422,12 +2421,12 @@
         <translation>메시지 서명(&amp;S)</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive bitwebs sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation>여러분 자신을 증명하기 위해 주소를 첨가하고 서명할 수 있습니다. 피싱 공격으로 말미암아 여러분의 서명을 통해 속아 넘어가게 할 수 있으므로, 서명하지 않은 모든 모호한 요소를 주의하십시오. 조항들이 완전 무결한지 확인 후 동의하는 경우에만 서명하십시오.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>메세지를 서명한 시피유체인 주소</translation>
+        <source>The Bitweb address to sign the message with</source>
+        <translation>메세지를 서명한 슈가체인 주소</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2458,8 +2457,8 @@
         <translation>현재 서명을 시스템 클립보드에 복사</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>여러분의 시피유체인 주소를 증명하려면 메시지 서명하십시오</translation>
+        <source>Sign the message to prove you own this Bitweb address</source>
+        <translation>여러분의 슈가체인 주소를 증명하려면 메시지 서명하십시오</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2482,12 +2481,12 @@
         <translation>메시지를 검증하기 위해 아래 칸에 각각 지갑 주소와 메시지, 전자서명을 입력하세요. (메시지 원본의 띄어쓰기, 들여쓰기, 행 나눔 등이 정확하게 입력되어야 하므로 원본을 복사해서 입력하세요) 이 기능은 메시지 검증이 주 목적이며, 네트워크 침입자에 의해 변조되지 않도록 전자서명 해독에 불필요한 시간을 소모하지 마세요. </translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>메세지의 서명에 사용된 시피유체인 주소</translation>
+        <source>The Bitweb address the message was signed with</source>
+        <translation>메세지의 서명에 사용된 슈가체인 주소</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>정확한 시피유체인주소가 입력됬는지 메시지를 확인하시오</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitweb address</source>
+        <translation>정확한 슈가체인주소가 입력됬는지 메시지를 확인하시오</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2712,7 +2711,7 @@
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>신규 채굴된 코인이 사용되기 위해서는 %1 개의 블록이 경과되어야 합니다. 블록을 생성할 때 블록체인에 추가되도록 네트워크에 전파되는 과정을 거치는데, 블록체인에 포함되지 못하고 실패한다면 해당 블록의 상태는 '미승인'으로 표현되고 시피유체인 또한 사용될 수 없습니다. 이 현상은 다른 노드가 비슷한 시간대에 동시에 블록을 생성할 때 종종 발생할 수 있습니다. </translation>
+        <translation>신규 채굴된 코인이 사용되기 위해서는 %1 개의 블록이 경과되어야 합니다. 블록을 생성할 때 블록체인에 추가되도록 네트워크에 전파되는 과정을 거치는데, 블록체인에 포함되지 못하고 실패한다면 해당 블록의 상태는 '미승인'으로 표현되고 슈가체인 또한 사용될 수 없습니다. 이 현상은 다른 노드가 비슷한 시간대에 동시에 블록을 생성할 때 종종 발생할 수 있습니다. </translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -2945,7 +2944,7 @@
     </message>
     <message>
         <source>Copy transaction ID</source>
-        <translation>거래 아이디 복사</translation>
+        <translation>거래 ID 복사</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -3078,7 +3077,7 @@
     </message>
     <message>
         <source>Could not commit transaction</source>
-        <translation>트랜잭션을 커밋 할 수 없습니다.</translation>
+        <translation>트랜잭션을 커밋 할 수 없습니다</translation>
     </message>
 </context>
 <context>
@@ -3132,7 +3131,7 @@
     </message>
     <message>
         <source>Specify your own public address</source>
-        <translation>공인 주소를 지정하십시오</translation>
+        <translation>공개 주소를 지정하십시오</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>
@@ -3179,12 +3178,12 @@
         <translation>HTTP 서버를 시작할 수 없습니다. 자세한 사항은 디버그 로그를 확인 하세요.</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>시피유체인 코어</translation>
+        <source>Bitweb Core</source>
+        <translation>슈가체인 유메카와</translation>
     </message>
     <message>
         <source>The %s developers</source>
-        <translation>%s 개발자</translation>
+        <translation>%s 디벨로퍼스</translation>
     </message>
     <message>
         <source>A fee rate (in %s/kB) that will be used when fee estimation has insufficient data (default: %s)</source>
@@ -3224,7 +3223,7 @@
     </message>
     <message>
         <source>Exclude debugging information for a category. Can be used in conjunction with -debug=1 to output debug logs for all categories except one or more specified categories.</source>
-        <translation>카테고리에 대한 디버깅 정보를 제외하십시오. -debug = 1과 함께 사용하여 하나 이상의 지정된 범주를 제외한 모든 범주의 디버그 로그를 출력 할 수 있습니다.</translation>
+        <translation>카테고리에 대한 디버깅 정보를 제외하십시오. -debug=1 과 함께 사용하여 하나 이상의 지정된 범주를 제외한 모든 범주의 디버그 로그를 출력 할 수 있습니다.</translation>
     </message>
     <message>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
@@ -3276,7 +3275,7 @@
     </message>
     <message>
         <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
-        <translation>블록을 재생할 수 없습니다. -reindex-chainstate를 사용하여 데이터베이스를 다시 빌드 해야 합니다.</translation>
+        <translation>블록을 재생할 수 없습니다. -reindex-chainstate 를 사용하여 데이터베이스를 다시 빌드 해야 합니다.</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3300,7 +3299,7 @@
     </message>
     <message>
         <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>경고: 현재 시피유체인 버전이 다른 네트워크 참여자들과 동일하지 않은 것 같습니다. 당신 또는 다른 참여자들이 동일한 시피유체인 버전으로 업그레이드 할 필요가 있습니다.</translation>
+        <translation>경고: 현재 슈가체인 버전이 다른 네트워크 참여자들과 동일하지 않은 것 같습니다. 당신 또는 다른 참여자들이 동일한 슈가체인 버전으로 업그레이드 할 필요가 있습니다.</translation>
     </message>
     <message>
         <source>Whether to save the mempool on shutdown and load on restart (default: %u)</source>
@@ -3428,11 +3427,11 @@
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
-        <translation>어떤 포트도 반응하지 않습니다. 사용자 반응=0 만약 원한다면</translation>
+        <translation>어떤 포트도 반응하지 않습니다. 원한다면 -listen=0 를 사용하세요.</translation>
     </message>
     <message>
         <source>Failed to rescan the wallet during initialization</source>
-        <translation>지갑 스캔 오류</translation>
+        <translation>초기화 중 지갑 스캔 오류</translation>
     </message>
     <message>
         <source>Importing...</source>
@@ -3496,7 +3495,7 @@
     </message>
     <message>
         <source>Prune mode is incompatible with -txindex.</source>
-        <translation>블록 축소 모드는 -txindex와 호환되지 않습니다.</translation>
+        <translation>블록 축소 모드는 -txindex 와 호환되지 않습니다.</translation>
     </message>
     <message>
         <source>Rebuild chain state and block index from the blk*.dat files on disk</source>
@@ -3516,7 +3515,7 @@
     </message>
     <message>
         <source>Send transactions with full-RBF opt-in enabled (RPC only, default: %u)</source>
-        <translation>full-RBF opt-in이 활성화 된 거래을 전송합니다. (기본값: %u)</translation>
+        <translation>full-RBF opt-in 이 활성화 된 거래을 전송합니다. (기본값: %u)</translation>
     </message>
     <message>
         <source>Set database cache size in megabytes (%d to %d, default: %d)</source>
@@ -3548,11 +3547,11 @@
     </message>
     <message>
         <source>Unsupported argument -tor found, use -onion.</source>
-        <translation>지원하지 않는 인수 -tor를 찾았습니다. -onion를 사용해주세요.</translation>
+        <translation>지원하지 않는 인수 -tor를 찾았습니다. -onion 를 사용해주세요.</translation>
     </message>
     <message>
         <source>Unsupported logging category %s=%s.</source>
-        <translation>지원되지 않는 로깅 카테고리 %s = %s.</translation>
+        <translation>지원되지 않는 로깅 카테고리 %s=%s.</translation>
     </message>
     <message>
         <source>Upgrading UTXO database</source>
@@ -3580,7 +3579,7 @@
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart %s to complete</source>
-        <translation>지갑을 새로 써야 합니다:  완성하기 위하여 %s을 다시 시작하십시오.</translation>
+        <translation>지갑을 새로 써야 합니다: 완성하기 위하여 %s을 다시 시작하십시오.</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -3604,7 +3603,7 @@
     </message>
     <message>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
-        <translation>오류: 들어오는 연결을 리슨(Listen)하는데 실패했습니다 (오류 리턴 %s)</translation>
+        <translation>오류: 들어오는 연결을 리스닝(Listening)하는데 실패했습니다 (오류 리턴 %s)</translation>
     </message>
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
@@ -3652,7 +3651,7 @@
     </message>
     <message>
         <source>Automatically create Tor hidden service (default: %d)</source>
-        <translation>Tor서비스를 자동적으로 생성 (기본값: %d)</translation>
+        <translation>Tor 숨김 서비스를 자동적으로 생성 (기본값: %d)</translation>
     </message>
     <message>
         <source>Connect through SOCKS5 proxy</source>
@@ -3712,7 +3711,7 @@
     </message>
     <message>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
-        <translation>시스템 한계로 인하여 -maxconnections를 %d 에서 %d로 줄였습니다.</translation>
+        <translation>시스템 한계로 인하여 -maxconnections 를 %d 에서 %d로 줄였습니다.</translation>
     </message>
     <message>
         <source>Rescan the block chain for missing wallet transactions on startup</source>
@@ -3724,11 +3723,11 @@
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
-        <translation>모든 디버그 설정 보기(설정: --help -help-debug)</translation>
+        <translation>모든 디버그 설정 보기 (사용법: --help -help-debug)</translation>
     </message>
     <message>
         <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>클라이언트 시작시 debug.log 파일 비우기(기본값: 디버그 안할때 1)</translation>
+        <translation>클라이언트 시작시 debug.log 파일 비우기 (기본값: -debug 아닐 때 1)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>
@@ -3756,7 +3755,7 @@
     </message>
     <message>
         <source>Tor control port password (default: empty)</source>
-        <translation>Tor 관리 포트 암호 (기본값: 공란)</translation>
+        <translation>Tor 관리 포트 암호 (기본값: 없음)</translation>
     </message>
     <message>
         <source>Tor control port to use if onion listening enabled (default: %s)</source>
@@ -3772,7 +3771,7 @@
     </message>
     <message>
         <source>Transaction too large</source>
-        <translation>너무 큰 거래</translation>
+        <translation>너무 큰 거래 (금액을 낮춰야 합니다)</translation>
     </message>
     <message>
         <source>Unable to generate initial keys</source>
@@ -3800,7 +3799,7 @@
     </message>
     <message>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
-        <translation>경고: 알려지지 않은 새로운 규칙이 활성화되었습니다. (버전비트 %i)</translation>
+        <translation>경고: 알려지지 않은 새로운 규칙이 활성화되었습니다. (versionbit %i)</translation>
     </message>
     <message>
         <source>Whether to operate in a blocks only mode (default: %u)</source>
@@ -3808,7 +3807,7 @@
     </message>
     <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation>-txindex를 바꾸기 위해서는 -reindex를 사용해서 데이터베이스를 재구성해야 합니다. </translation>
+        <translation>-txindex를 바꾸기 위해서는 -reindex 를 사용해서 데이터베이스를 재구성해야 합니다. </translation>
     </message>
     <message>
         <source>Zapping all transactions from wallet...</source>
@@ -3824,7 +3823,7 @@
     </message>
     <message>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
-        <translation>최고의 블록이 변하면 명령을 실행 (cmd 에 있는 %s 는 블록 해시에 의해 대체되어 짐)</translation>
+        <translation>최고의 블록이 변하면 명령을 실행 (cmd 에 있는 %s 는 블록 해시에 의해 대체됨)</translation>
     </message>
     <message>
         <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
@@ -3836,11 +3835,11 @@
     </message>
     <message>
         <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation>-maxtxfee값이 너무 큽니다!  하나의 거래에 너무 큰 수수료가 지불 됩니다.</translation>
+        <translation>-maxtxfee 값이 너무 큽니다! 하나의 거래에 너무 큰 수수료가 지불 됩니다.</translation>
     </message>
     <message>
         <source>Bind to given address to listen for JSON-RPC connections. This option is ignored unless -rpcallowip is also passed. Port is optional and overrides -rpcport. Use [host]:port notation for IPv6. This option can be specified multiple times (default: 127.0.0.1 and ::1 i.e., localhost, or if -rpcallowip has been specified, 0.0.0.0 and :: i.e., all addresses)</source>
-        <translation>주어진 주소에 바인드하여 JSON-RPC 연결을 기다립니다. 이 옵션은 -rpcallowip도 전달되지 않으면 무시됩니다. 포트는 옵션이며 -rpcport를 대체합니다. IPv6의 경우 [host]:port 표기법을 사용하십시오. 이 옵션은 여러 번 지정 할 수 있습니다 (기본값 : 127.0.0.1 및 ::1 즉, localhost 또는 -rpcallowip이 지정되면 0.0.0.0 및 모든 주소).</translation>
+        <translation>주어진 주소에 바인드하여 JSON-RPC 연결을 기다립니다. 이 옵션은 -rpcallowip 도 전달되지 않으면 무시됩니다. 포트는 옵션이며 -rpcport 를 대체합니다. IPv6의 경우 [host]:port 표기법을 사용하십시오. 이 옵션은 여러 번 지정 할 수 있습니다 (기본값 : 127.0.0.1 및 ::1 즉, localhost 또는 -rpcallowip 이 지정되면 0.0.0.0 및 모든 주소).</translation>
     </message>
     <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
@@ -3908,7 +3907,7 @@
     </message>
     <message>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
-        <translation>네트워크 버전 문자 (%i)의 길이가 최대길이 (%i)를 초과합니다. UA코멘트의 갯수나 길이를 줄이세요.</translation>
+        <translation>네트워크 버전 문자 (%i)의 길이가 최대길이 (%i)를 초과합니다. uacomment 의 갯수나 길이를 줄이세요.</translation>
     </message>
     <message>
         <source>Tries to keep outbound traffic under the given target (in MiB per 24h), 0 = no limit (default: %d)</source>
@@ -3928,11 +3927,11 @@
     </message>
     <message>
         <source>Warning: Unknown block versions being mined! It's possible unknown rules are in effect</source>
-        <translation>경고: 알려지지 않은 버전의 블록이 채굴되었습니다. 알려지지 않은 규칙이 적용되었을 가능성이 있습니다.</translation>
+        <translation>경고: 알려지지 않은 버전의 블록이 채굴되었습니다! 알려지지 않은 규칙이 적용되었을 가능성이 있습니다</translation>
     </message>
     <message>
         <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>경고 : 지갑파일이 손상되어 데이터가 복구되었습니다. 원래의 %s 파일은 %s 후에 %s 이름으로 저장됩니다. 잔액과 거래 내역이 정확하지 않다면 백업 파일로 부터 복원해야 합니다. </translation>
+        <translation>경고 : 지갑파일이 손상되어 데이터가 복구되었습니다! 원래의 %s 파일은 %s 후에 %s 이름으로 저장됩니다. 잔액과 거래 내역이 정확하지 않다면 백업 파일로 부터 복원해야 합니다. </translation>
     </message>
     <message>
         <source>Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times.</source>
@@ -4020,7 +4019,7 @@
     </message>
     <message>
         <source>Set the number of threads to service RPC calls (default: %d)</source>
-        <translation>원격 프로시져 호출 서비스를 위한 쓰레드 개수를 설정 (기본값 : %d)</translation>
+        <translation>RPC 호출 서비스를 위한 쓰레드 개수를 설정 (기본값: %d)</translation>
     </message>
     <message>
         <source>Specify configuration file (default: %s)</source>
@@ -4060,7 +4059,7 @@
     </message>
     <message>
         <source>Transaction amounts must not be negative</source>
-        <translation>거래액은 반드시 정수여야합니다.</translation>
+        <translation>거래액은 절대로 음수가 아니어야 합니다</translation>
     </message>
     <message>
         <source>Transaction has too long of a mempool chain</source>

@@ -14,7 +14,7 @@ static const int MAX_PASSPHRASE_SIZE = 1024;
 /* BitcoinGUI -- Size of icons in status bar */
 static const int STATUSBAR_ICONSIZE = 16;
 
-static const bool DEFAULT_SPLASHSCREEN = false;
+static const bool DEFAULT_SPLASHSCREEN = true;
 
 /* Invalid field background style */
 #define STYLE_INVALID "background:#FF8080"
@@ -47,7 +47,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Bitweb"
-#define QAPP_ORG_DOMAIN "bitweb.tech"
+#define QAPP_ORG_DOMAIN "bitweb.org"
 #define QAPP_APP_NAME_DEFAULT "Bitweb-Qt"
 #define QAPP_APP_NAME_TESTNET "Bitweb-Qt-testnet"
 

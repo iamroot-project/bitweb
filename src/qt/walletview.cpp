@@ -21,7 +21,6 @@
 
 #include <ui_interface.h>
 
-#include <qt/blockexplorer.h>
 #include <QAction>
 #include <QActionGroup>
 #include <QFileDialog>
@@ -178,14 +177,6 @@ void WalletView::gotoOverviewPage()
 void WalletView::gotoHistoryPage()
 {
     setCurrentWidget(transactionsPage);
-}
-
-void WalletView::gotoBlockExplorerPage()
-{
-    BlockExplorer *blockexplorerPage = new BlockExplorer(this);
-    blockexplorerPage->setAttribute(Qt::WA_DeleteOnClose);
-    // blockexplorerPage->setModel(walletModel);
-    blockexplorerPage->show();
 }
 
 void WalletView::gotoReceiveCoinsPage()

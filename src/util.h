@@ -49,6 +49,7 @@ public:
 
 extern bool fPrintToConsole;
 extern bool fPrintToDebugLog;
+extern bool fPruneDebugLog; // FIXME.BTE // prune debug.log
 
 extern bool fLogTimestamps;
 extern bool fLogTimeMicros;

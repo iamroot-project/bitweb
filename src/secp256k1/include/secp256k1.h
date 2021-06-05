@@ -582,7 +582,7 @@ SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ec_pubkey_tweak_mul(
  *
  * While secp256k1 code is written to be constant-time no matter what secret
  * values are, it's possible that a future compiler may output code which isn't,
- * and also that the BTE may not emit the same radio frequencies or draw the same
+ * and also that the CPU may not emit the same radio frequencies or draw the same
  * amount power for all values.
  *
  * This function provides a seed which is combined into the blinding value: that

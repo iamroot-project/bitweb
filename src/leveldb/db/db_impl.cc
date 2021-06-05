@@ -1332,7 +1332,7 @@ Status DBImpl::MakeRoomForWrite(bool force) {
       // L0 files.  Rather than delaying a single write by several
       // seconds when we hit the hard limit, start delaying each
       // individual write by 1ms to reduce latency variance.  Also,
-      // this delay hands over some BTE to the compaction thread in
+      // this delay hands over some CPU to the compaction thread in
       // case it is sharing the same core as the writer.
       mutex_.Unlock();
       env_->SleepForMicroseconds(1000);

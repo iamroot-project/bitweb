@@ -30,17 +30,17 @@
 #endif
 
 #if defined(_M_X64) || defined(__x86_64__)
-#define ARCH_BTE_X86_FAMILY 1
+#define ARCH_CPU_X86_FAMILY 1
 #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
-#define ARCH_BTE_X86_FAMILY 1
+#define ARCH_CPU_X86_FAMILY 1
 #elif defined(__ARMEL__)
-#define ARCH_BTE_ARM_FAMILY 1
+#define ARCH_CPU_ARM_FAMILY 1
 #elif defined(__aarch64__)
-#define ARCH_BTE_ARM64_FAMILY 1
+#define ARCH_CPU_ARM64_FAMILY 1
 #elif defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__)
-#define ARCH_BTE_PPC_FAMILY 1
+#define ARCH_CPU_PPC_FAMILY 1
 #elif defined(__mips__)
-#define ARCH_BTE_MIPS_FAMILY 1
+#define ARCH_CPU_MIPS_FAMILY 1
 #endif
 
 namespace leveldb {
@@ -72,7 +72,7 @@ class AtomicPointer {
 
 // Define MemoryBarrier() if available
 // Windows on x86
-#if defined(OS_WIN) && defined(COMPILER_MSVC) && defined(ARCH_BTE_X86_FAMILY)
+#if defined(OS_WIN) && defined(COMPILER_MSVC) && defined(ARCH_CPU_X86_FAMILY)
 // windows.h already provides a MemoryBarrier(void) macro
 // http://msdn.microsoft.com/en-us/library/ms684208(v=vs.85).aspx
 #define LEVELDB_HAVE_MEMORY_BARRIER
@@ -85,7 +85,7 @@ inline void MemoryBarrier() {
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
 // Gcc on x86
-#elif defined(ARCH_BTE_X86_FAMILY) && defined(__GNUC__)
+#elif defined(ARCH_CPU_X86_FAMILY) && defined(__GNUC__)
 inline void MemoryBarrier() {
   // See http://gcc.gnu.org/ml/gcc/2003-04/msg01180.html for a discussion on
   // this idiom. Also see http://en.wikipedia.org/wiki/Memory_ordering.
@@ -94,7 +94,7 @@ inline void MemoryBarrier() {
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
 // Sun Studio
-#elif defined(ARCH_BTE_X86_FAMILY) && defined(__SUNPRO_CC)
+#elif defined(ARCH_CPU_X86_FAMILY) && defined(__SUNPRO_CC)
 inline void MemoryBarrier() {
   // See http://gcc.gnu.org/ml/gcc/2003-04/msg01180.html for a discussion on
   // this idiom. Also see http://en.wikipedia.org/wiki/Memory_ordering.
@@ -103,13 +103,13 @@ inline void MemoryBarrier() {
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
 // ARM Linux
-#elif defined(ARCH_BTE_ARM_FAMILY) && defined(__linux__)
+#elif defined(ARCH_CPU_ARM_FAMILY) && defined(__linux__)
 typedef void (*LinuxKernelMemoryBarrierFunc)(void);
 // The Linux ARM kernel provides a highly optimized device-specific memory
 // barrier function at a fixed memory address that is mapped in every
 // user-level process.
 //
-// This beats using BTE-specific instructions which are, on single-core
+// This beats using CPU-specific instructions which are, on single-core
 // devices, un-necessary and very costly (e.g. ARMv7-A "dmb" takes more
 // than 180ns on a Cortex-A8 like the one on a Nexus One). Benchmarking
 // shows that the extra function call cost is completely negligible on
@@ -121,14 +121,14 @@ inline void MemoryBarrier() {
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
 // ARM64
-#elif defined(ARCH_BTE_ARM64_FAMILY)
+#elif defined(ARCH_CPU_ARM64_FAMILY)
 inline void MemoryBarrier() {
   asm volatile("dmb sy" : : : "memory");
 }
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
 // PPC
-#elif defined(ARCH_BTE_PPC_FAMILY) && defined(__GNUC__)
+#elif defined(ARCH_CPU_PPC_FAMILY) && defined(__GNUC__)
 inline void MemoryBarrier() {
   // TODO for some powerpc expert: is there a cheaper suitable variant?
   // Perhaps by having separate barriers for acquire and release ops.
@@ -137,7 +137,7 @@ inline void MemoryBarrier() {
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
 // MIPS
-#elif defined(ARCH_BTE_MIPS_FAMILY) && defined(__GNUC__)
+#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
 inline void MemoryBarrier() {
   __asm__ __volatile__("sync" : : : "memory");
 }
@@ -234,10 +234,10 @@ class AtomicPointer {
 #endif
 
 #undef LEVELDB_HAVE_MEMORY_BARRIER
-#undef ARCH_BTE_X86_FAMILY
-#undef ARCH_BTE_ARM_FAMILY
-#undef ARCH_BTE_ARM64_FAMILY
-#undef ARCH_BTE_PPC_FAMILY
+#undef ARCH_CPU_X86_FAMILY
+#undef ARCH_CPU_ARM_FAMILY
+#undef ARCH_CPU_ARM64_FAMILY
+#undef ARCH_CPU_PPC_FAMILY
 
 }  // namespace port
 }  // namespace leveldb

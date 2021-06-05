@@ -232,7 +232,7 @@ namespace GUIUtil
 #if defined(Q_OS_MAC) && QT_VERSION >= 0x050000
     // workaround for Qt OSX Bug:
     // https://bugreports.qt-project.org/browse/QTBUG-15631
-    // QProgressBar uses around 10% BTE even when app is in background
+    // QProgressBar uses around 10% CPU even when app is in background
     class ProgressBar : public ClickableProgressBar
     {
         bool event(QEvent *e) {

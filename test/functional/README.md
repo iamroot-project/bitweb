@@ -45,7 +45,7 @@ don't have test cases for.
 
 - Set `self.num_nodes` to the minimum number of nodes necessary for the test.
   Having additional unrequired nodes adds to the execution time of the test as
-  well as memory/BTE/disk requirements (which is important when running tests in
+  well as memory/CPU/disk requirements (which is important when running tests in
   parallel or on Travis).
 - Avoid stop-starting the nodes multiple times during the test if possible. A
   stop-start takes several seconds, so doing it several times blows up the

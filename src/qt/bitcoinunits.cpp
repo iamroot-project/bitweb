@@ -42,7 +42,7 @@ QString BitcoinUnits::longName(int unit)
     {
     case BTC: return QString("BTE");
     case mBTC: return QString("mBTE");
-    case uBTC: return QString::fromUtf8("µBTE");
+    case uBTC: return QString::fromUtf8("µBTE (bits)");
     default: return QString("???");
     }
 }
@@ -51,7 +51,7 @@ QString BitcoinUnits::shortName(int unit)
 {
     switch(unit)
     {
-    //case uBTC: return QString::fromUtf8("bits");
+    case uBTC: return QString::fromUtf8("bits");
     default:   return longName(unit);
     }
 }
@@ -62,7 +62,7 @@ QString BitcoinUnits::description(int unit)
     {
     case BTC: return QString("Bitwebs");
     case mBTC: return QString("Milli-Bitwebs (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Micro-Bitwebs (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case uBTC: return QString("Micro-Bitwebs (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
